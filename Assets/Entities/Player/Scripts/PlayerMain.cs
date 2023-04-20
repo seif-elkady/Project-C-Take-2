@@ -22,6 +22,7 @@ public class PlayerMain : MonoBehaviour
 
     void FixedUpdate()
     {
+        _playerController.SlopeCheck();
         _playerController.Move(_inputX);
         if (jumpRequest)
         {

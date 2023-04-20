@@ -22,40 +22,43 @@ public class PlayerController2D : BaseController2D
     protected override void FixedUpdate()
     {
         if (rb.velocity.y <= 0)
-        {
-            if (IsTouchingWall())
-            {
-                rb.velocity = new Vector2(0, -_wallSlideSpeed);
-                _isWallSliding = true;
-            }
-            else
-                _isWallSliding = false;
+            HandleFalling();
+        else
+            _isWallSliding = false;
 
-            if (IsGrounded())
-                _isWallSliding = false;
+        base.FixedUpdate();
+    }
+
+    public override void Move(float inputX)
+    {  
+        base.Move(inputX);
+    }
+
+    private void HandleFalling()
+    {
+        if (IsTouchingWall())
+        {
+            rb.velocity = new Vector2(0, -_wallSlideSpeed);
+            _isWallSliding = true;
         }
         else
             _isWallSliding = false;
-        base.FixedUpdate();
-    }
-    public override void Move(float inputX)
-    {
-       
-        base.Move(inputX);
 
+        if (IsGrounded())
+            _isWallSliding = false;
     }
 
-
+    #region Jumping
     public override void Jump()
     {
         if (jumpsRemaining > 0 && !_isWallSliding)
         {
+            if (maxSlopeAngle < slopeDownAngle)
+                return;
             NormalJump();
         }
         else if (_isWallSliding) // If there are no jumps left and wall sliding
-        {
             WallJump();
-        }
     }
 
     private void NormalJump()
@@ -74,6 +77,7 @@ public class PlayerController2D : BaseController2D
         SpriteFlippingHandler(-facingDirection);
     }
 
+    #endregion
 
     protected override void SpriteFlippingHandler(float x)
     {
