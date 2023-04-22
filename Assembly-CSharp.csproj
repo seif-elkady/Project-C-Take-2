@@ -56,9 +56,21 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Entities\Enemies\Scripts\PatrollerEnemy.cs" />
+    <Compile Include="Assets\Entities\MainDamageSystem.cs" />
+    <Compile Include="Assets\Entities\Player\Scripts\AyraAbilityManager.cs" />
     <Compile Include="Assets\Entities\Player\Scripts\PlayerController2D.cs" />
+    <Compile Include="Assets\Systems\Core\UiManager.cs" />
+    <Compile Include="Assets\Entities\Path.cs" />
     <Compile Include="Assets\Entities\Player\Scripts\PlayerMain.cs" />
     <Compile Include="Assets\Entities\BaseController2D.cs" />
+    <Compile Include="Assets\Systems\Combat\DamageInfo.cs" />
+    <Compile Include="Assets\Systems\Combat\DamageSystem.cs" />
+    <Compile Include="Assets\Entities\Player\Scripts\Fireball.cs" />
+    <Compile Include="Assets\Entities\Enemies\Scripts\EnemyHealthUi.cs" />
+    <Compile Include="Assets\Entities\Player\Scripts\ISpell.cs" />
+    <Compile Include="Assets\Entities\HealthUi.cs" />
+    <Compile Include="Assets\Systems\Core\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

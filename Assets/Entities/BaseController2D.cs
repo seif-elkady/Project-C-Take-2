@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BaseController2D : MonoBehaviour
 {
-    [SerializeField] private float _slopeCheckDistance;
+    [SerializeField] private float _slopeCheckDistance = 0.5f;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private CapsuleCollider2D _capsuleCollider;
     [SerializeField] private PhysicsMaterial2D _fullFriction;
@@ -23,7 +23,7 @@ public class BaseController2D : MonoBehaviour
     [SerializeField] protected float acceleration;
     [SerializeField] protected float jumpHeight;
     [SerializeField] protected int totalJumps;
-    [SerializeField] protected float checkRadius;
+    [SerializeField] protected float checkRadius = 0.45f;
     [SerializeField] protected float maxSlopeAngle;
     [SerializeField] protected LayerMask groundMask;
     [SerializeField] protected Rigidbody2D rb;

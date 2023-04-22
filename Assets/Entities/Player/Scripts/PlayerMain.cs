@@ -17,7 +17,18 @@ public class PlayerMain : MonoBehaviour
     {
         HandleHorizontalMovement();
         HandleJumping();
-        
+
+        HandleAbilities();
+       
+
+    }
+
+    private void HandleAbilities()
+    {
+        if(Input.GetKeyDown(KeyCode.E)) 
+        {
+
+        }
     }
 
     void FixedUpdate()
@@ -39,7 +50,7 @@ public class PlayerMain : MonoBehaviour
 
     private void HandleJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
         }
