@@ -5,30 +5,30 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
+    public PlayerState State{ private get; set; }
+
     [SerializeField] private BaseController2D _playerController;
+    [SerializeField] private AyraAbilityManager _abilityManager;
     private bool jumpRequest = false;
     private float _inputX;
-    void Start()
+    private void Update()
     {
+
+        if (State != PlayerState.CastingSpell)
+        {
+            HandleHorizontalMovement();
+            HandleJumping();
+
+            HandleAbilities();
+        }
         
     }
 
-    private void Update()
-    {
-        HandleHorizontalMovement();
-        HandleJumping();
 
-        HandleAbilities();
-       
-
-    }
 
     private void HandleAbilities()
     {
-        if(Input.GetKeyDown(KeyCode.E)) 
-        {
-
-        }
+        _abilityManager.HandleSpellCasting();
     }
 
     void FixedUpdate()
@@ -40,6 +40,7 @@ public class PlayerMain : MonoBehaviour
             _playerController.Jump();
             jumpRequest = false;
         }
+        Reset();
 
     }
 
@@ -54,6 +55,16 @@ public class PlayerMain : MonoBehaviour
         {
             jumpRequest = true;
         }
+    }
+    private void Reset()
+    {
+        _inputX = 0;
+    }
+
+    public enum PlayerState
+    {
+        Normal,
+        CastingSpell
     }
 
 }

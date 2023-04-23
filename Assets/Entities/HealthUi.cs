@@ -6,25 +6,25 @@ public class HealthUi : MonoBehaviour
 {
     [SerializeField] public DamageSystem _damageSystem;
     private Slider _healthSlider;
-    private void Start()
+    protected virtual void Start()
     {
         SetupInitialValues();
         SubscribeToDamageEvents();
     }
 
-    private void OnHealthDamage(DamageInfo info)
+    private void OnHealthDamage(float amount)
     {
-        DecreaseHealth(info.amount);
+        DecreaseHealth(amount);
     }
 
-    private void OnHeal(int amount)
+    private void OnHeal(float amount)
     {
         AddHealth(amount);
     }
 
-    private void AddHealth(int amount) { _healthSlider.value += amount; }
-    private void DecreaseHealth(int amount) { _healthSlider.value -= amount; }
-    private void SetMaxHealth(int amount) { _healthSlider.maxValue = amount; }
+    private void AddHealth(float amount) { _healthSlider.value += amount; }
+    private void DecreaseHealth(float amount) { _healthSlider.value -= amount; }
+    private void SetMaxHealth(float amount) { _healthSlider.maxValue = amount; }
 
     #region Initial Setup
     private void SetupInitialValues()

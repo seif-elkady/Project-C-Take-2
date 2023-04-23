@@ -6,8 +6,9 @@ public class EnemyHealthUi : HealthUi
     private Transform _ownerTransform;
     private Camera _camera;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _camera = UiManager.instance.mainCamera;
     }
  

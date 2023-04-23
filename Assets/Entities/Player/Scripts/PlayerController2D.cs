@@ -79,7 +79,7 @@ public class PlayerController2D : BaseController2D
 
     #endregion
 
-    protected override void SpriteFlippingHandler(float x)
+    public override void SpriteFlippingHandler(float x)
     {
         if (x > 0)
         {

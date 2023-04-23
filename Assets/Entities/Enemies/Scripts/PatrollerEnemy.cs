@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 
@@ -18,7 +19,7 @@ public class PatrollerEnemy : MonoBehaviour
     private bool _isNormal;
     private float _detectionRangeStart;
     private float _detectionRangeEnd;
-    private Behaviour _behaviour = Behaviour.Patrol;
+    private EnemyState _state = EnemyState.Patrol;
 
     private void Awake()
     {
@@ -26,7 +27,11 @@ public class PatrollerEnemy : MonoBehaviour
         var healthUiScript = healthPrefab.GetComponent<EnemyHealthUi>();
         healthUiScript.SetOwner(transform);
         healthUiScript.SetDamageSystem(_damageSystem);
+        _damageSystem.OnDead += HandleDeath;
     }
+
+    
+
     private void Start()
     {
         Setup();
@@ -35,6 +40,11 @@ public class PatrollerEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_state == EnemyState.Dead)
+        {
+            _controller.Move(0);
+            return;
+        }
         _controller.SlopeCheck();
         if(TargetDetected())
         {
@@ -47,19 +57,17 @@ public class PatrollerEnemy : MonoBehaviour
             Patrol();
     }
 
-    private bool TargetDetected()
-    {
-        return _target.position.x > _detectionRangeStart && _target.position.x < _detectionRangeEnd;
-    }
+    private bool TargetDetected() => _target.position.x > _detectionRangeStart && _target.position.x < _detectionRangeEnd;
+
     private void Chase()
     {
-        _behaviour = Behaviour.Chase;
+        _state = EnemyState.Chase;
         var direction = GetDirection(_target.position);
         _controller.Move(direction);
     }
     private void Patrol()
     {
-        _behaviour = Behaviour.Patrol;
+        _state = EnemyState.Patrol;
         int direction = GetDirection(_path.pathPoints[_pathIndex].position);
         _controller.Move(direction);
 
@@ -103,15 +111,15 @@ public class PatrollerEnemy : MonoBehaviour
         _isNormal = true;
         _pathIndex = 1;
     }
-
-    enum Behaviour
+    private void HandleDeath(object sender, EventArgs e)
     {
-        Patrol,
-        Chase,
-        Attack
+        SetState(EnemyState.Dead);
     }
 
-
+    public void SetState(EnemyState newState)
+    {
+        _state = newState;
+    }
     private void OnDrawGizmos()
     {
         Vector3 center = new Vector2((_detectionRangeStart + _detectionRangeEnd) / 2f, transform.position.y);
@@ -122,6 +130,13 @@ public class PatrollerEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(center, radius);
     }
 
+    public enum EnemyState
+    {
+        Patrol,
+        Chase,
+        Attack,
+        Dead
+    }
 
 }
 

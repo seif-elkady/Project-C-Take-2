@@ -145,7 +145,7 @@ public class BaseController2D : MonoBehaviour
     }
    
 
-    protected virtual void SpriteFlippingHandler(float x)
+    public virtual void SpriteFlippingHandler(float x)
     {
         if (x > 0)
             body.transform.localScale = new Vector2(bodyDefaultScale, body.transform.localScale.y);
