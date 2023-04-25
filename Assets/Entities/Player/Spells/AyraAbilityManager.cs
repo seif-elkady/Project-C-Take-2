@@ -11,13 +11,15 @@ public class AyraAbilityManager : MonoBehaviour
     [SerializeField] private BaseController2D _controller;
     [SerializeField] private PlayerMain _playerMain;
     [SerializeField] private LayerMask _abilityTargetMask;
+    private ISpell _spell;
     private event Action<float, float> abilityCasted = delegate { };
     readonly Dictionary<KeyCode, ISpell> abilities = new();
     readonly List<KeyCode> spellBindings = new();
     void Start()
     {
         spellBindings.Add(KeyCode.E);
-        abilities.Add(spellBindings[0], new Fireball(_spawnLocation, _abilityTargetMask));
+        _spell = GetComponent<Fireball>();
+        abilities.Add(spellBindings[0], _spell);
         abilityCasted += HandleAbilityCast;
     }
 
@@ -30,9 +32,12 @@ public class AyraAbilityManager : MonoBehaviour
             if (Input.GetKeyDown(spellKey))
                 if (abilities.TryGetValue(spellKey, out ISpell ability))
                 {
-                    ability.Cast();
-                    var dir = _spawnLocation.position.x > transform.position.x ? 1 : -1;
-                    abilityCasted?.Invoke(dir, .2f);
+                    if(ability.IsReady())
+                    {
+                        ability.Cast(_spawnLocation, _abilityTargetMask);
+                        var dir = _spawnLocation.position.x > transform.position.x ? 1 : -1;
+                        abilityCasted?.Invoke(dir, 0);
+                    }
                 }
         }
     }

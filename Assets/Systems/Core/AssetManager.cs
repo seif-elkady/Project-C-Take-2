@@ -4,10 +4,13 @@ public class AssetManager : MonoBehaviour
 {
 
     public static AssetManager instance;
-    public GameObject fireball;
+
     public FlyingProjectileScriptable fireballStats;
 
-    private void Start()
+    public GameObject fireballPrefab;
+    public GameObject damageTextPrefab;
+
+    private void Awake()
     {
         if(!instance)
             instance = this;

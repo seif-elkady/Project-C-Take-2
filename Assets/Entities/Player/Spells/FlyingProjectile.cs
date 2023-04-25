@@ -1,5 +1,4 @@
 ﻿
-using System;
 using UnityEngine;
 
 
@@ -11,20 +10,17 @@ public class FlyingProjectile : MonoBehaviour, IFlyingProjectile
     [SerializeField] private DirectionMode _mode;
     [SerializeField] private Rigidbody2D _rb;
 
-    private FlyingProjectileScriptable _stats;
-    private Camera _camera;
+    private FlyingProjectileScriptable _projectileData;
     private Vector2 _direction;
-    private Vector3 _rotation;
     private bool _shouldMove;
 
     private void Start()
     {
-        _camera = UiManager.instance.mainCamera;
         _shouldMove = true;
-        _stats = AssetManager.instance.fireballStats;
+        _projectileData = AssetManager.instance.fireballStats;
 
         _direction = -transform.right;
-        _rb.velocity = new Vector2(_direction.x, _direction.y).normalized * _stats.speed;
+        _rb.velocity = new Vector2(_direction.x, _direction.y).normalized * _projectileData.speed;
 
         Destroy(gameObject, 6f);
     }
@@ -35,15 +31,22 @@ public class FlyingProjectile : MonoBehaviour, IFlyingProjectile
             _rb.velocity = Vector2.zero;
     }
 
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var targetHit = collision.gameObject;
         if (IsSameMask(targetHit.layer, targetMask))
         {
-            Destroy(gameObject);
-            DamageInfo info = new DamageInfo(_stats.baseDamage, DamageTypesSystem.DamageTypes.Fire);
+            DamageInfo info = new DamageInfo(_projectileData.baseDamage, _projectileData.damageType);
             targetHit.GetComponent<DamageSystem>().TakeDamage(info);
             // TODO: Play explosion effect
+
+            if (_projectileData.onDestroyPrefab != null)
+            {
+                Instantiate(_projectileData.onDestroyPrefab, transform.position, _projectileData.onDestroyPrefab.transform.rotation);
+            }
+            Destroy(gameObject);
         }
     }
 
@@ -56,7 +59,11 @@ public class FlyingProjectile : MonoBehaviour, IFlyingProjectile
     {
         
     }
-
+    public void Setup(LayerMask targetMask, FlyingProjectileScriptable stats)
+    {
+        _projectileData = stats;
+        this.targetMask = targetMask;
+    }
     enum DirectionMode
     {
         FollowMouse,

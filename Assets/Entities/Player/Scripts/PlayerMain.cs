@@ -9,23 +9,26 @@ public class PlayerMain : MonoBehaviour
 
     [SerializeField] private BaseController2D _playerController;
     [SerializeField] private AyraAbilityManager _abilityManager;
+    [SerializeField] private DamageSystem _damageSystem;
     private bool jumpRequest = false;
     private float _inputX;
+
+    private void Start()
+    {
+        _damageSystem.OnDead += HandleDeath; 
+    }
+
+
     private void Update()
     {
-
-        if (State != PlayerState.CastingSpell)
+        if (State != PlayerState.CastingSpell && State != PlayerState.Dead)
         {
             HandleHorizontalMovement();
             HandleJumping();
 
             HandleAbilities();
         }
-        
     }
-
-
-
     private void HandleAbilities()
     {
         _abilityManager.HandleSpellCasting();
@@ -41,7 +44,6 @@ public class PlayerMain : MonoBehaviour
             jumpRequest = false;
         }
         Reset();
-
     }
 
     private void HandleHorizontalMovement()
@@ -60,11 +62,16 @@ public class PlayerMain : MonoBehaviour
     {
         _inputX = 0;
     }
+    private void HandleDeath(object sender, EventArgs e)
+    {
+        State = PlayerState.Dead;
+    }
 
     public enum PlayerState
     {
         Normal,
-        CastingSpell
+        CastingSpell,
+        Dead
     }
 
 }

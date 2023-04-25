@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: FireballInfo
   m_EditorClassIdentifier: 
   speed: 18
-  baseDamage: 20
+  baseDamage: 10
+  cooldown: 2
+  damageType: 1
+  onDestroyPrefab: {fileID: 1093870102412152058, guid: 41ea18b81fd006545ab913b64de58391, type: 3}

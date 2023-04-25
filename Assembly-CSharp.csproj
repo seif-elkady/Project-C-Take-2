@@ -58,33 +58,34 @@
   <ItemGroup>
     <Compile Include="Assets\Entities\Enemies\Scripts\PatrollerEnemy.cs" />
     <Compile Include="Assets\Systems\Combat\MainDamageSystem.cs" />
+    <Compile Include="Assets\Systems\Core\AssetManager.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Entities\Player\Spells\AyraAbilityManager.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\SimpleCharacterMotor.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Entities\Player\Scripts\PlayerController2D.cs" />
     <Compile Include="Assets\Systems\Core\UiManager.cs" />
+    <Compile Include="Assets\Systems\Combat\DamageTypesSystem.cs" />
+    <Compile Include="Assets\Scriptable Objects\FlyingProjectileScriptable.cs" />
     <Compile Include="Assets\Entities\Path.cs" />
     <Compile Include="Assets\Entities\Player\Scripts\PlayerMain.cs" />
+    <Compile Include="Assets\Entities\Player\Scripts\PlayerDamageSystem.cs" />
     <Compile Include="Assets\Entities\BaseController2D.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\ProximityActivate.cs" />
+    <Compile Include="Assets\Entities\Player\Spells\IFlyingProjectile.cs" />
     <Compile Include="Assets\Systems\Combat\DamageInfo.cs" />
     <Compile Include="Assets\Systems\Combat\DamageSystem.cs" />
     <Compile Include="Assets\Entities\Player\Spells\Fireball.cs" />
     <Compile Include="Assets\Entities\Enemies\Scripts\EnemyHealthUi.cs" />
     <Compile Include="Assets\Entities\Player\Spells\ISpell.cs" />
-    <Compile Include="Assets\Entities\HealthUi.cs" />
-    <Compile Include="Assets\Systems\Core\GameManager.cs" />
-    <Compile Include="Assets\Entities\Player\Spells\FlyingProjectile.cs" />
-    <Compile Include="Assets\Systems\Core\AssetManager.cs" />
-    <Compile Include="Assets\Entities\Player\Spells\IFlyingProjectile.cs" />
-    <Compile Include="Assets\Scriptable Objects\FlyingProjectileScriptable.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\SimpleCharacterMotor.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\ProximityActivate.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
-    <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\Entities\Player\Scripts\RotatePoint.cs" />
-    <Compile Include="Assets\Systems\Combat\DamageTypesSystem.cs" />
-    <Compile Include="Assets\Entities\Player\Scripts\PlayerDamageSystem.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Entities\HealthUi.cs" />
+    <Compile Include="Assets\Entities\Player\Spells\FlyingProjectile.cs" />
+    <Compile Include="Assets\Systems\Core\GameManager.cs" />
+    <Compile Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
+    <Compile Include="Assets\Systems\DestroyObjectAfterTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UnityTechnologies\ParticlePack\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -867,6 +868,9 @@
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
@@ -890,6 +894,9 @@
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
@@ -926,12 +933,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

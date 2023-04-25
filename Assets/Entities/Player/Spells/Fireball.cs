@@ -2,23 +2,37 @@
 using UnityEngine;
 
 
-public class Fireball : MonoBehaviour, ISpell
+public class Fireball : MonoBehaviour , ISpell
 {
-    private Transform _spawnLocation;
-    private LayerMask _targetMask;
-
-    public Fireball(Transform spawnLocation, LayerMask targetMask)
+    private FlyingProjectileScriptable _fireballStats;
+    private float _cooldown;
+    private float _currentCooldown;
+    private void Start()
     {
-        _spawnLocation = spawnLocation;
-        _targetMask = targetMask;
-
+        _fireballStats = AssetManager.instance.fireballStats;
+        _cooldown = _fireballStats.cooldown;
     }
-    public void Cast()
+    private void Update()
     {
-        var fireball = Instantiate(AssetManager.instance.fireball, _spawnLocation.position, _spawnLocation.parent.rotation);
-        fireball.GetComponent<FlyingProjectile>().targetMask = _targetMask;
+        if (_currentCooldown > 0)
+            _currentCooldown -= Time.deltaTime;
+    }
+    public void Cast(Transform spawnLocation, LayerMask targetMask)
+    {
+        var fireball = Instantiate(AssetManager.instance.fireballPrefab, spawnLocation.position, spawnLocation.parent.rotation);
+        fireball.GetComponent<FlyingProjectile>().Setup(targetMask, _fireballStats);
+        _currentCooldown = _cooldown;
+        
+    }  
+
+    public bool IsReady()
+    {
+        return _currentCooldown <= 0;
     }
 
-    
+    public void SetMaxCooldown(float newCooldown)
+    {
+        _cooldown = newCooldown;
+    }
 }
 

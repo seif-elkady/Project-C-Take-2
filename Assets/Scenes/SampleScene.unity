@@ -2289,8 +2289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15dc1081cc5d7fb4b89a173ffa1b7513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireball: {fileID: 6476101851432616013, guid: 91620f40bc2d0ce42bffc0689ca7ff1d, type: 3}
   fireballStats: {fileID: 11400000, guid: cc19752ebd7196c4e93ce7d0b510c1c6, type: 2}
+  fireballPrefab: {fileID: 6476101851432616013, guid: 91620f40bc2d0ce42bffc0689ca7ff1d, type: 3}
+  damageTextPrefab: {fileID: 297431926177480310, guid: 51d5b0858bece4e44a93cff9e45eeebe, type: 3}
 --- !u!1 &881755026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2595,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3157,11 +3158,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1795048275}
-  - component: {fileID: 1795048276}
   - component: {fileID: 1795048277}
   - component: {fileID: 1795048280}
   - component: {fileID: 1795048283}
   - component: {fileID: 1795048282}
+  - component: {fileID: 1795048284}
+  - component: {fileID: 1795048276}
   - component: {fileID: 1795048279}
   m_Layer: 8
   m_Name: Player
@@ -3224,6 +3226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1795048280}
   _abilityManager: {fileID: 1795048282}
+  _damageSystem: {fileID: 1795048283}
 --- !u!70 &1795048279
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3305,6 +3308,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+--- !u!114 &1795048284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795048272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d78848501edc247a05dabf68ee20ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1855493044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,7 +3733,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 394492155
   m_SortingOrder: 0
   m_TargetDisplay: 0

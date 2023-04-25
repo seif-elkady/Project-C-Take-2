@@ -1,4 +1,5 @@
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,12 @@ public class HealthUi : MonoBehaviour
     }
 
     private void AddHealth(float amount) { _healthSlider.value += amount; }
-    private void DecreaseHealth(float amount) { _healthSlider.value -= amount; }
+    private void DecreaseHealth(float amount) 
+    { 
+        _healthSlider.value -= amount;
+        var floatingText = Instantiate(AssetManager.instance.damageTextPrefab, transform.position, Quaternion.identity, UiManager.instance.mainCanvas.transform);
+        floatingText.GetComponentInChildren<TMP_Text>().text = ((int)amount).ToString();
+    }
     private void SetMaxHealth(float amount) { _healthSlider.maxValue = amount; }
 
     #region Initial Setup
